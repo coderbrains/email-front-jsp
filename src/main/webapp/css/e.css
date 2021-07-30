@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+
+body
+{
+	background-image: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),  url(/img/ramsun.jpg);
+	background-attachment : fixed;
+	background-size: cover;	
+}
+
+.r{
+		
+			font-size: 100px;
+		
+}
+		
