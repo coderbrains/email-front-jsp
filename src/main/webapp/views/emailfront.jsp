@@ -22,9 +22,9 @@
 <body>
 
 	<div class="container-fluid">
-		<div class="row" style="margin-top: 150px;">
-			<div class="col-md-5 offset-md-7 col-sm-12 col-xs-12">
-				<div class="card shadow">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-6 offset-md-6 col-sm-12 col-xs-12">
+				<div class="card shadow" style="padding:5px;z-index:5px;">
 					<div class="card-header bg-primary text-center">
 						<h3 class="text-white">
 							<i class="fa fa-envelope mr-2"></i>Send email
@@ -33,25 +33,39 @@
 					<div class="card-body">
 
 						<form>
+
+							<!-- for email address -->
 							<div ng-app="" name="myForm" class="form-group">
 								<label for="exampleInputEmail1">Email address(To)</label> <input
-									type="email" class="form-control" type="email" name="myAddress"
-									ng-model="text"> <small class="form-text text-muted">
-									<span ng-show="myForm.myAddress.$error.email">Not a
-										valid e-mail address</span>
+									type="email" class="form-control" type="email"
+									placeholder="Enter the receipient email address.."
+									name="myAddress" ng-model="text"> <small
+									class="form-text text-muted"> <span
+									ng-show="myForm.myAddress.$error.email">Not a valid
+										e-mail address</span>
 								</small>
 							</div>
+
+							<!-- for subject field.. -->
+
+
+							<div ng-app="" name="myForm" class="form-group">
+								<label for="exampleInputEmail1">Subject</label> <input
+									placeholder="Enter the subject here" type="email"
+									class="form-control" type="email" name="subject"
+									ng-model="text">
+							</div>
+
 							<div class="form-group">
-								<label for="exampleInputPassword1">Password</label> <input
-									type="password" class="form-control" id="exampleInputPassword1"
-									placeholder="Password">
+								<label for="exampleInputPassword1">Compose</label>
+								<textarea type="text" rows="10" class="form-control"
+									id="exampleInputPassword1"
+									placeholder="Compose Your Email Here"></textarea>
 							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">Check me out</label>
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary">Send<i class=" ml-2 fa fa-car"></i></button>
 							</div>
-							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 
 					</div>
