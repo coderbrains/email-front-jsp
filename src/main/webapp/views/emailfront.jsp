@@ -24,7 +24,7 @@
 	<div class="container-fluid">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-6 offset-md-6 col-sm-12 col-xs-12">
-				<div class="card shadow" style="padding:5px;z-index:5px;">
+				<div class="card shadow" style="padding: 5px; z-index: 5px;">
 					<div class="card-header bg-primary text-center">
 						<h3 class="text-white">
 							<i class="fa fa-envelope mr-2"></i>Send email
@@ -32,18 +32,20 @@
 					</div>
 					<div class="card-body">
 
-						<form>
+						<form ng-app="myApp" ng-controller="validateCtrl" name="myForm"
+							novalidate>
 
 							<!-- for email address -->
 							<div ng-app="" name="myForm" class="form-group">
 								<label for="exampleInputEmail1">Email address(To)</label> <input
-									type="email" class="form-control" type="email"
-									placeholder="Enter the receipient email address.."
-									name="myAddress" ng-model="text"> <small
-									class="form-text text-muted"> <span
-									ng-show="myForm.myAddress.$error.email">Not a valid
-										e-mail address</span>
-								</small>
+									type="email" class="form-control" name="email" ng-model="to"
+									required placeholder="Enter the receipient email address.."
+									name="myAddress" ng-model="text"> <span
+									style="color: red" ng-show="myForm.email.$invalid"> <span
+									ng-show="myForm.email.$error.required">Email is
+										required.</span><br> <span ng-show="myForm.email.$error.email">Invalid
+										email address.</span>
+								</span>
 							</div>
 
 							<!-- for subject field.. -->
@@ -51,20 +53,31 @@
 
 							<div ng-app="" name="myForm" class="form-group">
 								<label for="exampleInputEmail1">Subject</label> <input
-									placeholder="Enter the subject here" type="email"
+									placeholder="Enter the subject here" type="email" required
 									class="form-control" type="email" name="subject"
-									ng-model="text">
+									ng-model="subject" ng-model="text"> <span
+									style="color: red;" ng-show="myForm.subject.$error.required">subject
+									is required</span>
 							</div>
 
 							<div class="form-group">
 								<label for="exampleInputPassword1">Compose</label>
-								<textarea type="text" rows="10" class="form-control"
+								<textarea type="text" rows="10" required="required"
+									name="message" ng-model="message" class="form-control"
 									id="exampleInputPassword1"
 									placeholder="Compose Your Email Here"></textarea>
+								<span style="color: red;"
+									ng-show="myForm.message.$error.required">message is
+									required</span>
+
 							</div>
 
 							<div class="text-center">
-								<button type="submit" class="btn btn-primary">Send<i class=" ml-2 fa fa-car"></i></button>
+								<button
+									ng-disabled="myForm.email.$error.email || myForm.email.$error.required || myForm.message.$error.required || myForm.subject.$error.required "
+									type="submit" class="btn btn-primary">
+									Send<i class=" ml-2 fa fa-car"></i>
+								</button>
 							</div>
 						</form>
 
@@ -93,5 +106,12 @@
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('validateCtrl', function($scope) {
+
+		});
+	</script>
 </body>
 </html>
