@@ -38,8 +38,9 @@
 							<!-- for email address -->
 							<div ng-app="" name="myForm" class="form-group">
 								<label for="exampleInputEmail1">Email address(To)</label> <input
-									type="email" class="form-control" name="email" ng-model="to"
-									required placeholder="Enter the receipient email address.."
+									type="email" class="form-control" name="email"
+									ng-model="$scope.email.to" required
+									placeholder="Enter the receipient email address.."
 									name="myAddress" ng-model="text"> <span
 									style="color: red" ng-show="myForm.email.$invalid"> <span
 									ng-show="myForm.email.$error.required">Email is
@@ -51,11 +52,11 @@
 							<!-- for subject field.. -->
 
 
-							<div ng-app="" name="myForm" class="form-group">
+							<div class="form-group">
 								<label for="exampleInputEmail1">Subject</label> <input
-									placeholder="Enter the subject here" type="email" required
-									class="form-control" type="email" name="subject"
-									ng-model="subject" ng-model="text"> <span
+									placeholder="Enter the subject here" required
+									class="form-control" type="text" name="subject"
+									ng-model="$scope.email.subject"> <span
 									style="color: red;" ng-show="myForm.subject.$error.required">subject
 									is required</span>
 							</div>
@@ -63,8 +64,8 @@
 							<div class="form-group">
 								<label for="exampleInputPassword1">Compose</label>
 								<textarea type="text" rows="10" required="required"
-									name="message" ng-model="message" class="form-control"
-									id="exampleInputPassword1"
+									name="message" ng-model="$scope.email.message"
+									class="form-control" id="exampleInputPassword1"
 									placeholder="Compose Your Email Here"></textarea>
 								<span style="color: red;"
 									ng-show="myForm.message.$error.required">message is
@@ -73,7 +74,7 @@
 							</div>
 
 							<div class="text-center">
-								<button
+								<button ng-click="Sendmail($scope.email)"
 									ng-disabled="myForm.email.$error.email || myForm.email.$error.required || myForm.message.$error.required || myForm.subject.$error.required "
 									type="submit" class="btn btn-primary">
 									Send<i class=" ml-2 fa fa-car"></i>
@@ -103,13 +104,51 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 	<script>
 		var app = angular.module('myApp', []);
-		app.controller('validateCtrl', function($scope) {
+		app.controller('validateCtrl', function($scope,  $http) {
+
+			$scope.email;
+
+			$scope.emailobj = function() {
+
+				var email_empty = {
+					"to" : "",
+					"subject" : "",
+					"message" : ""
+				};
+				email = email_empty;
+				console.log(email);
+			}
+
+			$scope.emailobj();
+
+			
+
+			$scope.Sendmail = function(mail) {
+
+				console.log("This is the testing  of the method call ", mail);
+				
+				$http({
+					method : 'POST',
+					url : 'http://localhost:6004/sendemail',
+					data : mail
+				}).then(function successCallback(response) {
+					swal("sent!");
+					window.location="http://localhost:7051/DMS/index";
+				}, function errorCallback(response) {
+					
+					console.log("hello");
+					swal("sent!");
+					window.location="http://localhost:7051/DMS/index";
+				});
+
+			};
+			
 
 		});
 	</script>
